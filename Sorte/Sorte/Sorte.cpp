@@ -2,10 +2,31 @@
 //
 
 #include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector <int> CreateMassive(int n)
+{
+	vector <int> mas;
+	mas.reserve(n);
+	for (int i = 0; i < n - 1; i++)
+	{
+		if (i % 2 == 0)
+			mas.push_back(i + 2);
+		else
+			mas.push_back(i);
+	}
+
+	return mas;
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	vector <int> mas/*, result_of_sort*/;
+	//mas = CreateMassive(100);
+	/////*for (int i = 0; i < 100; i++)
+	////	cout << mas[i] << " ";*/
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
