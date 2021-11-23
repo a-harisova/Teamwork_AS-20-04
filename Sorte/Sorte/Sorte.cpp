@@ -46,7 +46,6 @@ public:
 };
 
 //Владислава Калюта
-
 void InsertionSort(int* mas, int n) //сортировка вставками
 {
 	int i, j, key = 0, temp = 0;
@@ -143,11 +142,11 @@ int main()
 		cout << mas[i] << " ";
 	cout << endl;*/
 	InsertionSort(CreateMassive(100), 100);
-	cout << "Затраченное время: " << t.elapsed() << endl;
+	cout << "Сортировка вставками - затраченное время: " << t.elapsed() << endl;
 	ShellSort(CreateMassive(100), 100);
-	cout << "Затраченное время: " << t.elapsed() << endl;
+	cout << "Сортировка Шелла - затраченное время: " << t.elapsed() << endl;
 	RadixSort(CreateMassive(100), 100);
-	cout << "Затраченное время: " << t.elapsed() << endl;
+	cout << "Поразрядная сортировка - затраченное время: " << t.elapsed() << endl;
 		 /*<< "Отсортированный массив: " << endl;
 	for (int i = 0; i < 99; i++)
 		cout << mas[i] << " ";
