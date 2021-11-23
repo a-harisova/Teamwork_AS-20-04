@@ -23,5 +23,14 @@
     <ClInclude Include="Sorte.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RadixSort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InsertionSort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

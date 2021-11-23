@@ -3,6 +3,10 @@
 
 #include <iostream>
 #include <vector>
+#include <chrono>
+#include "InsertionSort.h"
+#include "RadixSort.h"
+#include "Shell.h"
 
 using namespace std;
 
@@ -24,9 +28,10 @@ vector <int> CreateMassive(int n)
 int main()
 {
 	vector <int> mas/*, result_of_sort*/;
-	//mas = CreateMassive(100);
-	/////*for (int i = 0; i < 100; i++)
-	////	cout << mas[i] << " ";*/
+	auto start = std::chrono::system_clock::now();
+	auto finish = std::chrono::system_clock::now();
+	auto duration = std::chrono::duration_cast <std::chrono::nanoseconds> (finish - start).count();
+	double read_time = duration;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
