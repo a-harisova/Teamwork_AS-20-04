@@ -2,15 +2,16 @@
 //
 
 #include <iostream>
-#include <vector>
+#include <set>
 #include <chrono>
+#include <algorithm>
 
 using namespace std;
 
 int* CreateMassive(int n)
 {
 	int* mas = new int[n];
-	for (int i = 0; i < n - 1; i++)
+	for (int i = 0; i < n; i++)
 	{
 		if (i % 2 == 0)
 			mas[i] = i + 2;
@@ -136,22 +137,26 @@ int main()
 {
 	Timer t;
 	setlocale(LC_ALL, "Rus");
-	/*int* mas = CreateMassive(100);
-	cout << "Сортируемый массив:" << endl;
-	for (int i = 0; i < 99; i++)
-		cout << mas[i] << " ";
-	cout << endl;*/
-	InsertionSort(CreateMassive(100), 100);
-	cout << "Сортировка вставками - затраченное время: " << t.elapsed() << endl;
-	ShellSort(CreateMassive(100), 100);
-	cout << "Сортировка Шелла - затраченное время: " << t.elapsed() << endl;
-	RadixSort(CreateMassive(100), 100);
-	cout << "Поразрядная сортировка - затраченное время: " << t.elapsed() << endl;
-		 /*<< "Отсортированный массив: " << endl;
-	for (int i = 0; i < 99; i++)
-		cout << mas[i] << " ";
-	cout << endl;*/
-	
+	set <int> number { 100, 10000, 200000 };
+	for (auto n : number)
+	{
+		cout << "Размер вектора: " << n << endl;
+		/*int* mas = CreateMassive(n);*/
+		/*cout << "Сортируемый массив:" << endl;
+		for (int i = 0; i < n - 1; i++)
+			cout << mas[i] << " ";
+		cout << endl;*/
+		InsertionSort(CreateMassive(n), n);
+		cout << "Сортировка вставками - затраченное время: " << t.elapsed() << endl;
+		ShellSort(CreateMassive(n), n);
+		cout << "Сортировка Шелла - затраченное время: " << t.elapsed() << endl;
+		RadixSort(CreateMassive(n), n);
+		cout << "Поразрядная сортировка - затраченное время: " << t.elapsed() << endl;
+		/*cout << "Отсортированный массив: " << endl;*/
+		/*for (int i = 0; i < n - 1; i++)
+			cout << mas[i] << " ";
+		cout << endl;*/
+	}
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
