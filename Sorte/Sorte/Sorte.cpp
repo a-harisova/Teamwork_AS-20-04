@@ -4,34 +4,155 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
-#include "InsertionSort.h"
-#include "RadixSort.h"
-#include "Shell.h"
 
 using namespace std;
 
-vector <int> CreateMassive(int n)
+int* CreateMassive(int n)
 {
-	vector <int> mas;
-	mas.reserve(n);
+	int* mas = new int[n];
 	for (int i = 0; i < n - 1; i++)
 	{
 		if (i % 2 == 0)
-			mas.push_back(i + 2);
+			mas[i] = i + 2;
 		else
-			mas.push_back(i);
+			mas[i] = i;
 	}
 
 	return mas;
 }
 
+class Timer
+{
+private:
+	using clock_t = std::chrono::high_resolution_clock;
+	using second_t = std::chrono::duration < double, std::ratio <1> >;
+
+	std::chrono::time_point <clock_t> start;
+
+public:
+	Timer() : start(clock_t::now())
+	{
+	}
+
+	void reset()
+	{
+		start = clock_t::now();
+	}
+
+	double elapsed() const
+	{
+		return std::chrono::duration_cast <second_t> (clock_t::now() - start).count();
+	}
+};
+
+//Владислава Калюта
+
+void InsertionSort(int* mas, int n) //сортировка вставками
+{
+	int i, j, key = 0, temp = 0;
+	for (i = 0; i < n - 1; i++)
+	{
+		key = i; // наш указатель переводим на второй элемент (индексация массива начинается с 0) P.s. Изменила key = i + 1 на i, т.к. массив заполнялся со второго элемента (Адиля)
+		temp = mas[key]; //temp - элемент, который мы будем "вставлять"
+		for (j = i + 1; j > 0; j--)
+		{
+			if (temp < mas[j - 1]) // если тот элемент, который мы хотим переставить, меньше элемента, расположенного слева от него, то
+			{
+				mas[j] = mas[j - 1]; // элемент слева от temp сдвинули вправо
+				key = j - 1; // указатель обнуляем, вследствие чего цикл прервётся
+			}
+
+		}
+		mas[key] = temp; // temp сдвинули влево
+	}
+}
+
+//Илья Лазарев
+void ShellSort(int* mass, int n)
+{
+	int i, j, step;
+	int tmp;
+	for (step = n / 2; step > 0; step /= 2)
+		for (i = step; i < n; i++)
+		{
+			tmp = mass[i];
+			for (j = i; j >= step; j -= step)
+			{
+				if (tmp < mass[j - step])
+					mass[j] = mass[j - step];
+				else
+					break;
+			}
+			mass[j] = tmp;
+		}
+}
+
+//Софья Кузьмина
+int GetMax(int arr[], int size)
+{
+	int max = arr[0];
+	for (int i = 1; i < size; i++)
+	{
+		if (arr[i] > max)
+			max = arr[i];
+	}
+	return max;
+}
+
+void CountingSort(int arr[], int size, int div)
+{
+	const int max = 10;
+	int* output = new int[size];
+	int count[max];
+
+	for (int i = 0; i < max; ++i)
+		count[i] = 0;
+
+	// Calculate count of elements
+	for (int i = 0; i < size; i++)
+		count[(arr[i] / div) % 10]++;
+
+	// Calculate cumulative count
+	for (int i = 1; i < max; i++)
+		count[i] += count[i - 1];
+
+	// Place the elements in sorted order
+	for (int i = size - 1; i >= 0; i--) {
+		output[count[(arr[i] / div) % 10] - 1] = arr[i];
+		count[(arr[i] / div) % 10]--;
+	}
+
+	for (int i = 0; i < size; i++)
+		arr[i] = output[i];
+}
+void RadixSort(int arr[], int size) {
+	int m = GetMax(arr, size);
+	for (int div = 1; m / div > 0; div *= 10)
+	{
+		CountingSort(arr, size, div);
+	}
+}
+
 int main()
 {
-	vector <int> mas/*, result_of_sort*/;
-	auto start = std::chrono::system_clock::now();
-	auto finish = std::chrono::system_clock::now();
-	auto duration = std::chrono::duration_cast <std::chrono::nanoseconds> (finish - start).count();
-	double read_time = duration;
+	Timer t;
+	setlocale(LC_ALL, "Rus");
+	/*int* mas = CreateMassive(100);
+	cout << "Сортируемый массив:" << endl;
+	for (int i = 0; i < 99; i++)
+		cout << mas[i] << " ";
+	cout << endl;*/
+	InsertionSort(CreateMassive(100), 100);
+	cout << "Затраченное время: " << t.elapsed() << endl;
+	ShellSort(CreateMassive(100), 100);
+	cout << "Затраченное время: " << t.elapsed() << endl;
+	RadixSort(CreateMassive(100), 100);
+	cout << "Затраченное время: " << t.elapsed() << endl;
+		 /*<< "Отсортированный массив: " << endl;
+	for (int i = 0; i < 99; i++)
+		cout << mas[i] << " ";
+	cout << endl;*/
+	
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

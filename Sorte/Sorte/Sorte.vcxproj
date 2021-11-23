@@ -142,12 +142,6 @@
   <ItemGroup>
     <ClCompile Include="Sorte.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="InsertionSort.h" />
-    <ClInclude Include="RadixSort.h" />
-    <ClInclude Include="Shell.h" />
-    <ClInclude Include="Sorte.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
