@@ -1,9 +1,8 @@
 // shella.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include <stdio.h>
-#include <malloc.h>
-#include <conio.h>
+#include <iostream>
+using namespace std;
 
 //сортировка методом Шелла
 void ShellSort(int n, int mass[])
@@ -27,25 +26,22 @@ void ShellSort(int n, int mass[])
 
 int main()
 {
-    //ввод N
     int N;
-    printf("Input N: ");
-    scanf_s("%d", &N);
-    //выделение памяти под массив
-    int* mass;
-    mass = (int*)malloc(N * sizeof(int));
-    //ввод элементов массива
-    printf("Input the array elements:\n");
-    for (int i = 0; i < N; i++)
-        scanf_s("%d", &mass[i]);
+    cout << "Input N:" << "\n";
+    cin >> N;
+    int *mass = new int[N];
+    cout << "Array of random elements:" << "\n";
+    for (int i = 0; i < N; i++) {
+        mass[i] = rand();
+        cout << mass[i] << "\n";
+    }
+    cout << "Sorted array:" << "\n";
     ShellSort(N, mass);
-    printf("Sorted array:\n");
-    for (int i = 0; i < N; i++)
-        printf("%d ", mass[i]);
-    printf("\n");
-    free(mass);
-    _getch();
-    return 0;
+    for (int i = 0; i < N; i++) {
+        cout << mass[i] << "\n";
+    }
+    
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
